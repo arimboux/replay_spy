@@ -1,2 +1,2 @@
 
- ![Alt Text](data/results/detect.gif)
+ ![Alt Text](detect.gif)
