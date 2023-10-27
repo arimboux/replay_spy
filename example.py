@@ -80,7 +80,7 @@ if __name__ == "__main__":
                     frame = cv2.putText(frame, k, v, cv2.FONT_HERSHEY_SIMPLEX, 0.5,  
                     (0, 255, 0) , 1, cv2.LINE_AA, False)
                 
-                cv2.imwrite(f"data/results/{count}.jpeg", frame)
+                cv2.imwrite(f"data/results/{str(count).rjust(4, '0')}.jpeg", frame)
                 count += 1
                 # plt.imshow(frame)
                 # plt.show()

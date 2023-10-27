@@ -66,7 +66,7 @@ def save_frame_sample(filepath, output_path, crop=False):
                     dummy_coords = [902, 2024, 1413, 2536]
                     frame = crop_frame(frame, dummy_coords)
 
-                output_name = f"{output_path}_{count}.jpeg" 
+                output_name = f"{output_path}_{count}.jpeg"
                 cv2.imwrite(output_name, frame)
             count += 1
 
