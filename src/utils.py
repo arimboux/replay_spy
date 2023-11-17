@@ -69,17 +69,44 @@ def save_frame_sample(filepath, output_path, crop=False):
 
     cap.release()
 
+def save_single_frame(filepath, output_path, img_idx, resize=False):
+    
+    cap = cv2.VideoCapture(filepath)
+
+    if cap.isOpened() == False:
+        print("Error opening video stream or file")
+
+    count = 0
+    print("Starting to read frame ...")
+    while cap.isOpened():
+        ret, frame = cap.read()
+        if ret:
+            count += 1
+            print(count)
+            if count == int(img_idx):
+                if resize:
+                    frame = cv2.resize(frame, (1920, 1080))
+
+                cv2.imwrite(output_path, frame)
+            
+                cap.release()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("filepath")
-    parser.add_argument("box_coords", nargs="+", type=int)
+    parser.add_argument("task")
+    
+    parser.add_argument("--filepath")
+    parser.add_argument("--output_path")
+    parser.add_argument("--config")
+    parser.add_argument("--frame_count")
+    parser.add_argument("--resize", action="store_true")
+    # parser.add_argument("--box_coords", nargs="+", type=int)
 
     args = parser.parse_args()
 
-    print(args.filepath)
-    print(args.box_coords)
+    if args.task == "single_frame":
+        save_single_frame(args.filepath, args.output_path, args.frame_count, args.resize)    
 
-    display_single_frame(args.filepath, img_idx=100)
-    save_frame_sample(args.filepath, "data/imgs_lol/minimap_custom", True)
+    # display_single_frame(args.filepath, img_idx=100)
+    # save_frame_sample(args.filepath, "data/imgs_lol/minimap_custom", True)
